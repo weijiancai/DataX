@@ -23,11 +23,9 @@ public final class OriginalConfPretreatmentUtil {
     public static DataBaseType DATABASE_TYPE;
 
     public static void doPretreatment(Configuration originalConfig) {
-        // 检查 username/password 配置（必填）
-        originalConfig.getNecessaryValue(Key.USERNAME,
-                DBUtilErrorCode.REQUIRED_VALUE);
-        originalConfig.getNecessaryValue(Key.PASSWORD,
-                DBUtilErrorCode.REQUIRED_VALUE);
+        // 检查 username/password 配置（必填）, sqlite 不需要
+//        originalConfig.getNecessaryValue(Key.USERNAME, DBUtilErrorCode.REQUIRED_VALUE);
+//        originalConfig.getNecessaryValue(Key.PASSWORD, DBUtilErrorCode.REQUIRED_VALUE);
         dealWhere(originalConfig);
 
         simplifyConf(originalConfig);

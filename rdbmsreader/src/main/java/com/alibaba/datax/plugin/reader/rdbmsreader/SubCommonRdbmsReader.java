@@ -18,6 +18,8 @@ import com.alibaba.datax.plugin.rdbms.util.DataBaseType;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Types;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -105,6 +107,17 @@ public class SubCommonRdbmsReader extends CommonRdbmsReader {
                                 "year")) {
                             record.addColumn(new LongColumn(rs.getInt(i)));
                         } else {
+                            // sqlite数据库先获取字符串，再转换成日期
+                            if (this.jdbcUrl.startsWith("jdbc:sqlite:")) {
+                                String value = rs.getString(i);
+                                String pattern = "yyyy-MM-dd HH:mm:ss";
+                                if (value.length() == 10) {
+                                    pattern = "yyyy-MM-dd";
+                                }
+                                DateFormat df = new SimpleDateFormat(pattern);
+                                record.addColumn(new DateColumn(df.parse(value)));
+                                break;
+                            }
                             record.addColumn(new DateColumn(rs.getDate(i)));
                         }
                         break;

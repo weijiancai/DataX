@@ -787,6 +787,7 @@ public final class DBUtil {
                             pluginType,
                             String.format("%s%s", pluginName, pluginType),
                             "plugin.json" }, File.separator);
+            LOG.info("pluginJsonPath: " + pluginJsonPath);
             Configuration configuration = Configuration.from(new File(
                     pluginJsonPath));
             List<String> drivers = configuration.getList("drivers",

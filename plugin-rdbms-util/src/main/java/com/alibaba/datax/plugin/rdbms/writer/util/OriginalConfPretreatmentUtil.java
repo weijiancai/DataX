@@ -25,8 +25,8 @@ public final class OriginalConfPretreatmentUtil {
 
     public static void doPretreatment(Configuration originalConfig, DataBaseType dataBaseType) {
         // 检查 username/password 配置（必填）
-        originalConfig.getNecessaryValue(Key.USERNAME, DBUtilErrorCode.REQUIRED_VALUE);
-        originalConfig.getNecessaryValue(Key.PASSWORD, DBUtilErrorCode.REQUIRED_VALUE);
+//        originalConfig.getNecessaryValue(Key.USERNAME, DBUtilErrorCode.REQUIRED_VALUE);
+//        originalConfig.getNecessaryValue(Key.PASSWORD, DBUtilErrorCode.REQUIRED_VALUE);
 
         doCheckBatchSize(originalConfig);
 
@@ -70,7 +70,7 @@ public final class OriginalConfPretreatmentUtil {
 
             if (null == tables || tables.isEmpty()) {
                 throw DataXException.asDataXException(DBUtilErrorCode.REQUIRED_VALUE,
-                        "您未配置写入数据库表的表名称. 根据配置DataX找不到您配置的表. 请检查您的配置并作出修改.");
+                        "您未配置写入数据库表的表名称. 根据配置 DataX找不到您配置的表. 请检查您的配置并作出修改.");
             }
 
             // 对每一个connection 上配置的table 项进行解析
